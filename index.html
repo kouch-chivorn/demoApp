@@ -12,17 +12,16 @@ src="http://code.angularjs.org/1.2.28/angular.min.js"></script>
     <div class="container">
       <div class="row">
         <div class="col-md-9 col-md-offset-3">
-          <div ng-include="'_nav.html'"></div>
+          <div ng-include="'nav.html'"></div>
           <ui-view></ui-view>
         </div>
       </div>
     </div>
-
     <script type="text/ng-template" id="/index.html">
       <div class="page-header">
       <h1>Passing values between controllers </h1>
-    </div>
-    <div class="panel panel-default" ng-controller="BookController">
+          </div>
+          <div class="panel panel-default" ng-controller="BookController">
       <div class="panel-body">
         <table class="table">
           <thead>
@@ -39,23 +38,22 @@ src="http://code.angularjs.org/1.2.28/angular.min.js"></script>
               <td>{{book.title}}</td>
               <td>{{book.author}}</td>
               <td>{{book.price}}</td>
-              <td >{{orderBook.orderQuantity}}</td>
+              <td >{{book.orderQuantity}}</td>
               <td ng-controller = "CartController"><button ng-click="addToCart(book)">Add to Cart </button></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div>
-        <a href="#/cart">Proceed to checkout</a>
+        <a href="#/cart" class="btn btn-default btn-primary">Proceed to checkout</a>
       </div>
-    </div>
+          </div>
     </script>
-
     <script type="text/ng-template" id="/cart.html">
       <div class="page-header">
-      <h1>Book Bill</h1>
-    </div>
-    <div class="panel panel-default" ng-controller="CartController">
+      <h1>Book Invoice</h1>
+          </div>
+          <div class="panel panel-default" ng-controller="CartController">
       <div class="panel-body">
         <table class="table">
           <thead>
@@ -67,8 +65,17 @@ src="http://code.angularjs.org/1.2.28/angular.min.js"></script>
               <th>Amount</th>
             </tr>
           </thead>
+          <tfoot>
+      		<tr>
+      			<td>Total</td>
+      			<td> </td>
+      			<td> </td>
+      			<td></td>
+      			<td>{{order.totalAmount}}</td>
+      		</tr>
+          </tfoot>
           <tbody>
-            <tr ng-repeat="book in order.orderBooks">
+            <tr ng-repeat="book in order.orderBooks" ng-if="book.orderQuantity != 0">
               <td>{{book.title}}</td>
               <td>{{book.author}}</td>
               <td>{{book.price}}</td>
@@ -81,7 +88,7 @@ src="http://code.angularjs.org/1.2.28/angular.min.js"></script>
       <div>
         <a href="#/home">Back home</a>
       </div>
-    </div>
+          </div>
     </script>
   </body>
 </html>
